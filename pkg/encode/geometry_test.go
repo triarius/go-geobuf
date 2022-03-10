@@ -4,10 +4,10 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/cairnapp/go-geobuf/pkg/encode"
-	"github.com/cairnapp/go-geobuf/pkg/geojson"
-	"github.com/cairnapp/go-geobuf/pkg/geometry"
-	"github.com/cairnapp/go-geobuf/proto"
+	. "github.com/triarius/go-geobuf/pkg/encode"
+	"github.com/triarius/go-geobuf/pkg/geojson"
+	"github.com/triarius/go-geobuf/pkg/geometry"
+	"github.com/triarius/go-geobuf/proto"
 )
 
 func TestEncodePoint(t *testing.T) {

@@ -15,9 +15,9 @@ A basic example shows how this library will infer the proper precision for encod
 
 ```go
 import (
-    "github.com/cairnapp/go-geobuf"
-    "github.com/cairnapp/go-geobuf/pkg/geometry"
-    "github.com/cairnapp/go-geobuf/pkg/geojson"
+    "github.com/triarius/go-geobuf"
+    "github.com/triarius/go-geobuf/pkg/geometry"
+    "github.com/triarius/go-geobuf/pkg/geojson"
 )
 
 point := geojson.NewGeometry(geometry.Point([]float64{
