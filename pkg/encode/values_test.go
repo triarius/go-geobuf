@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	. "github.com/triarius/go-geobuf/pkg/encode"
-	"github.com/triarius/go-geobuf/proto"
+	proto "go.buf.build/grpc/go/qwant/geobuf/geobufproto"
 )
 
 func TestEncodeIntValue(t *testing.T) {

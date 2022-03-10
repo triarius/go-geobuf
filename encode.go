@@ -4,7 +4,7 @@ import (
 	"github.com/triarius/go-geobuf/pkg/encode"
 	"github.com/triarius/go-geobuf/pkg/geojson"
 	"github.com/triarius/go-geobuf/pkg/math"
-	"github.com/triarius/go-geobuf/proto"
+	proto "go.buf.build/grpc/go/qwant/geobuf/geobufproto"
 )
 
 func Encode(obj interface{}) *proto.Data {

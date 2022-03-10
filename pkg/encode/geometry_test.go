@@ -7,7 +7,7 @@ import (
 	. "github.com/triarius/go-geobuf/pkg/encode"
 	"github.com/triarius/go-geobuf/pkg/geojson"
 	"github.com/triarius/go-geobuf/pkg/geometry"
-	"github.com/triarius/go-geobuf/proto"
+	proto "go.buf.build/grpc/go/qwant/geobuf/geobufproto"
 )
 
 func TestEncodePoint(t *testing.T) {

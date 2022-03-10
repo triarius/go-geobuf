@@ -2,7 +2,7 @@ package encode
 
 import (
 	"github.com/triarius/go-geobuf/pkg/geojson"
-	"github.com/triarius/go-geobuf/proto"
+	proto "go.buf.build/grpc/go/qwant/geobuf/geobufproto"
 )
 
 func EncodeFeature(feature *geojson.Feature, opts *EncodingConfig) (*proto.Data_Feature, error) {

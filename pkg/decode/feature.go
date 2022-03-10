@@ -3,7 +3,7 @@ package decode
 import (
 	"github.com/triarius/go-geobuf/pkg/geojson"
 	"github.com/triarius/go-geobuf/pkg/geometry"
-	"github.com/triarius/go-geobuf/proto"
+	proto "go.buf.build/grpc/go/qwant/geobuf/geobufproto"
 )
 
 func DecodeFeature(msg *proto.Data, feature *proto.Data_Feature, precision, dimension uint32) *geojson.Feature {
