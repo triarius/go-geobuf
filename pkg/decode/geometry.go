@@ -8,7 +8,7 @@ import (
 )
 
 func DecodeGeometry(geo *proto.Data_Geometry, precision, dimensions uint32) *geojson.Geometry {
-	switch geo.Type {
+	switch *geo.Type {
 	case proto.Data_Geometry_POINT:
 		return geojson.NewGeometry(makePoint(geo.Coords, precision))
 	case proto.Data_Geometry_MULTIPOINT:

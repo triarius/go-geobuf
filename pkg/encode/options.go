@@ -47,7 +47,7 @@ func analyze(obj interface{}, opts *EncodingConfig) {
 		}
 	case *geojson.Feature:
 		analyze(geojson.NewGeometry(t.Geometry), opts)
-		for key, _ := range t.Properties {
+		for key := range t.Properties {
 			opts.Keys.Add(key)
 		}
 	case *geojson.Geometry:

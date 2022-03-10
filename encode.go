@@ -25,10 +25,12 @@ func EncodeWithOptions(obj interface{}, opts ...encode.EncodingOption) (*proto.D
 		opt(cfg)
 	}
 
+	dimensions := uint32(cfg.Dimension)
+	precision := math.EncodePrecision(cfg.Precision)
 	data := &proto.Data{
 		Keys:       cfg.Keys.Keys(),
-		Dimensions: uint32(cfg.Dimension),
-		Precision:  math.EncodePrecision(cfg.Precision),
+		Dimensions: &dimensions,
+		Precision:  &precision,
 	}
 
 	switch t := obj.(type) {

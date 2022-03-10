@@ -37,8 +37,9 @@ func TestEncodePoint(t *testing.T) {
 
 	p := geojson.NewGeometry(geometry.Point([]float64{124.123, 234.456}))
 	for i, test := range testCases {
+		pointT := proto.Data_Geometry_POINT
 		expected := &proto.Data_Geometry{
-			Type:   proto.Data_Geometry_POINT,
+			Type:   &pointT,
 			Coords: test.Expected,
 		}
 		encoded := EncodeGeometry(p, &EncodingConfig{

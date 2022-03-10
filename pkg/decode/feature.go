@@ -8,7 +8,7 @@ import (
 
 func DecodeFeature(msg *proto.Data, feature *proto.Data_Feature, precision, dimension uint32) *geojson.Feature {
 	geo := feature.Geometry
-	decodedGeo := DecodeGeometry(geo, msg.Precision, msg.Dimensions)
+	decodedGeo := DecodeGeometry(geo, *msg.Precision, *msg.Dimensions)
 	var geoFeature *geojson.Feature
 	switch decodedGeo.Type {
 	case geojson.GeometryCollectionType:
