@@ -1,9 +1,9 @@
 package encode
 
 import (
-	"github.com/cairnapp/go-geobuf/pkg/geojson"
-	"github.com/cairnapp/go-geobuf/pkg/geometry"
-	"github.com/cairnapp/go-geobuf/pkg/math"
+	"github.com/triarius/go-geobuf/pkg/geojson"
+	"github.com/triarius/go-geobuf/pkg/geometry"
+	"github.com/triarius/go-geobuf/pkg/math"
 )
 
 type EncodingConfig struct {
@@ -47,7 +47,7 @@ func analyze(obj interface{}, opts *EncodingConfig) {
 		}
 	case *geojson.Feature:
 		analyze(geojson.NewGeometry(t.Geometry), opts)
-		for key, _ := range t.Properties {
+		for key := range t.Properties {
 			opts.Keys.Add(key)
 		}
 	case *geojson.Geometry:

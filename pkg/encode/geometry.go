@@ -1,10 +1,10 @@
 package encode
 
 import (
-	"github.com/cairnapp/go-geobuf/pkg/geojson"
-	"github.com/cairnapp/go-geobuf/pkg/geometry"
-	"github.com/cairnapp/go-geobuf/pkg/math"
-	"github.com/cairnapp/go-geobuf/proto"
+	"github.com/triarius/go-geobuf/pkg/geojson"
+	"github.com/triarius/go-geobuf/pkg/geometry"
+	"github.com/triarius/go-geobuf/pkg/math"
+	proto "go.buf.build/grpc/go/qwant/geobuf/geobufproto"
 )
 
 const (
@@ -16,31 +16,40 @@ const (
 	GeometryMultiPolygon    = "MultiPolygon"
 )
 
+var (
+	pointT           = proto.Data_Geometry_POINT
+	multiPointT      = proto.Data_Geometry_MULTIPOINT
+	lineStringT      = proto.Data_Geometry_LINESTRING
+	multiLineStringT = proto.Data_Geometry_MULTILINESTRING
+	polygonT         = proto.Data_Geometry_POLYGON
+	multiPolygonT    = proto.Data_Geometry_MULTIPOLYGON
+)
+
 func EncodeGeometry(g *geojson.Geometry, opt *EncodingConfig) *proto.Data_Geometry {
 	switch g.Type {
 	case geojson.GeometryPointType:
 		p := g.Coordinates.(geometry.Point)
 		return &proto.Data_Geometry{
-			Type:   proto.Data_Geometry_POINT,
+			Type:   &pointT,
 			Coords: translateCoords(opt.Precision, p[:]),
 		}
 	case geojson.GeometryMultiPointType:
 		p := g.Coordinates.(geometry.MultiPoint)
 		return &proto.Data_Geometry{
-			Type:   proto.Data_Geometry_MULTIPOINT,
+			Type:   &multiPointT,
 			Coords: translateLine(opt.Precision, opt.Dimension, p, false),
 		}
 	case geojson.GeometryLineStringType:
 		p := g.Coordinates.(geometry.LineString)
 		return &proto.Data_Geometry{
-			Type:   proto.Data_Geometry_LINESTRING,
+			Type:   &lineStringT,
 			Coords: translateLine(opt.Precision, opt.Dimension, p, false),
 		}
 	case geojson.GeometryMultiLineStringType:
 		p := g.Coordinates.(geometry.MultiLineString)
 		coords, lengths := translateMultiLine(opt.Precision, opt.Dimension, p)
 		return &proto.Data_Geometry{
-			Type:    proto.Data_Geometry_MULTILINESTRING,
+			Type:    &multiLineStringT,
 			Coords:  coords,
 			Lengths: lengths,
 		}
@@ -48,7 +57,7 @@ func EncodeGeometry(g *geojson.Geometry, opt *EncodingConfig) *proto.Data_Geomet
 		p := []geometry.Ring(g.Coordinates.(geometry.Polygon))
 		coords, lengths := translateMultiRing(opt.Precision, opt.Dimension, p)
 		return &proto.Data_Geometry{
-			Type:    proto.Data_Geometry_POLYGON,
+			Type:    &polygonT,
 			Coords:  coords,
 			Lengths: lengths,
 		}
@@ -56,7 +65,7 @@ func EncodeGeometry(g *geojson.Geometry, opt *EncodingConfig) *proto.Data_Geomet
 		p := []geometry.Polygon(g.Coordinates.(geometry.MultiPolygon))
 		coords, lengths := translateMultiPolygon(opt.Precision, opt.Dimension, p)
 		return &proto.Data_Geometry{
-			Type:    proto.Data_Geometry_MULTIPOLYGON,
+			Type:    &multiPolygonT,
 			Coords:  coords,
 			Lengths: lengths,
 		}

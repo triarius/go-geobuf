@@ -1,10 +1,10 @@
 package geobuf
 
 import (
-	"github.com/cairnapp/go-geobuf/pkg/encode"
-	"github.com/cairnapp/go-geobuf/pkg/geojson"
-	"github.com/cairnapp/go-geobuf/pkg/math"
-	"github.com/cairnapp/go-geobuf/proto"
+	"github.com/triarius/go-geobuf/pkg/encode"
+	"github.com/triarius/go-geobuf/pkg/geojson"
+	"github.com/triarius/go-geobuf/pkg/math"
+	proto "go.buf.build/grpc/go/qwant/geobuf/geobufproto"
 )
 
 func Encode(obj interface{}) *proto.Data {
@@ -25,10 +25,12 @@ func EncodeWithOptions(obj interface{}, opts ...encode.EncodingOption) (*proto.D
 		opt(cfg)
 	}
 
+	dimensions := uint32(cfg.Dimension)
+	precision := math.EncodePrecision(cfg.Precision)
 	data := &proto.Data{
 		Keys:       cfg.Keys.Keys(),
-		Dimensions: uint32(cfg.Dimension),
-		Precision:  math.EncodePrecision(cfg.Precision),
+		Dimensions: &dimensions,
+		Precision:  &precision,
 	}
 
 	switch t := obj.(type) {

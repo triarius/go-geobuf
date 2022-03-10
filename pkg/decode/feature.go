@@ -1,14 +1,14 @@
 package decode
 
 import (
-	"github.com/cairnapp/go-geobuf/pkg/geojson"
-	"github.com/cairnapp/go-geobuf/pkg/geometry"
-	"github.com/cairnapp/go-geobuf/proto"
+	"github.com/triarius/go-geobuf/pkg/geojson"
+	"github.com/triarius/go-geobuf/pkg/geometry"
+	proto "go.buf.build/grpc/go/qwant/geobuf/geobufproto"
 )
 
 func DecodeFeature(msg *proto.Data, feature *proto.Data_Feature, precision, dimension uint32) *geojson.Feature {
 	geo := feature.Geometry
-	decodedGeo := DecodeGeometry(geo, msg.Precision, msg.Dimensions)
+	decodedGeo := DecodeGeometry(geo, *msg.Precision, *msg.Dimensions)
 	var geoFeature *geojson.Feature
 	switch decodedGeo.Type {
 	case geojson.GeometryCollectionType:

@@ -1,14 +1,14 @@
 package decode
 
 import (
-	"github.com/cairnapp/go-geobuf/pkg/geojson"
-	"github.com/cairnapp/go-geobuf/pkg/geometry"
-	"github.com/cairnapp/go-geobuf/pkg/math"
-	"github.com/cairnapp/go-geobuf/proto"
+	"github.com/triarius/go-geobuf/pkg/geojson"
+	"github.com/triarius/go-geobuf/pkg/geometry"
+	"github.com/triarius/go-geobuf/pkg/math"
+	proto "go.buf.build/grpc/go/qwant/geobuf/geobufproto"
 )
 
 func DecodeGeometry(geo *proto.Data_Geometry, precision, dimensions uint32) *geojson.Geometry {
-	switch geo.Type {
+	switch *geo.Type {
 	case proto.Data_Geometry_POINT:
 		return geojson.NewGeometry(makePoint(geo.Coords, precision))
 	case proto.Data_Geometry_MULTIPOINT:
